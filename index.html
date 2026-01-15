@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Predigtdienst</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css" />
+  <meta name="theme-color" content="#ffffff" />
+</head>
+
+<body>
+  <header class="header">
+    <div>
+      <h1>Predigtdienst</h1>
+      <p class="sub">Clean • Kacheln • LDC separat • Dienstjahr Sep–Aug</p>
+    </div>
+    <div class="header-actions">
+      <button id="btnOverview" class="btn">Übersicht</button>
+      <button id="btnSave" class="btn btn-primary">Speichern</button>
+    </div>
+  </header>
+
+  <main class="grid">
+    <section class="card">
+      <h2>Datum</h2>
+      <div class="row">
+        <label>Jahr
+          <input id="year" type="number" min="2000" max="2100" value="2026" />
+        </label>
+
+        <label>Monat
+          <div class="month">
+            <button id="prevMonth" class="btn btn-small">◀</button>
+            <input id="month" type="number" min="1" max="12" value="1" />
+            <button id="nextMonth" class="btn btn-small">▶</button>
+          </div>
+        </label>
+
+        <span class="hint">(gespeichert als YYYY-MM-01)</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Dienstart</h2>
+      <p class="sub">Tippe eine Kachel an, um den Dienstart auszuwählen.</p>
+
+      <div id="tiles" class="tiles"></div>
+
+      <p class="sub">Ausgewählt: <span id="selectedLabel"></span></p>
+    </section>
+
+    <section class="card">
+      <h2>Allgemein</h2>
+      <p class="sub">Zeit: <span id="generalTime">0 h 0 m</span></p>
+
+      <div class="row">
+        <button id="gPlus1h" class="btn">+1 Stunde</button>
+        <button id="gPlus15m" class="btn">+15 Min</button>
+        <button id="gReset" class="btn">Reset</button>
+      </div>
+
+      <button id="gSave" class="btn btn-primary full">Allgemein speichern</button>
+    </section>
+
+    <section class="card">
+      <h2>LDC</h2>
+      <p class="sub">Zeit: <span id="ldcTime">0 h 0 m</span></p>
+
+      <div class="row">
+        <button id="lPlus1h" class="btn">+1 Stunde</button>
+        <button id="lPlus15m" class="btn">+15 Min</button>
+        <button id="lReset" class="btn">Reset</button>
+      </div>
+
+      <button id="lSave" class="btn btn-primary full">LDC speichern</button>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span id="status">Bereit.</span>
+    <button id="btnExport" class="btn btn-small">Export JSON</button>
+    <button id="btnImport" class="btn btn-small">Import JSON</button>
+    <input id="importFile" type="file" accept="application/json" hidden />
+  </footer>
+
+  <dialog id="overviewDialog" class="dialog">
+    <div class="dialog-body">
+      <h3>Übersicht</h3>
+      <pre id="overviewText"></pre>
+      <div class="dialog-actions">
+        <button id="closeOverview" class="btn btn-primary">Schließen</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("./service-worker.js");
+    }
+  </script>
+</body>
+</html>
